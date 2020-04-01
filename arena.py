@@ -8,12 +8,25 @@ class Kostka:
     """
 
     def __init__(self):
-        self.pocet_sten = 6     # takto je atribut veřejný a lze jej měnit zvenku třídy
+        """
+        iniciacni metoda
+        """
+        #self.pocet_sten = 6     # takto je atribut veřejný a lze jej měnit zvenku třídy
                                 # např. kostka.pocet_sten = 12
+        self.__pocet_sten = 6   # dvojité podtržítko před názvem udělá z atributu atribut neveřejný 
+
+
+    def vrat_pocet_sten(self):
+        """
+        vrati pocet sten kostky 
+        """
+        return self.__pocet_sten
 
 
 kostka = Kostka()
-print(kostka.pocet_sten)
-steny = input("zadej počet stěn: ")
-kostka.pocet_sten = steny
-print(kostka.pocet_sten)
+print(kostka.vrat_pocet_sten())
+
+steny = int(input("zadej počet stěn: "))
+kostka.__pocet_sten = steny
+print(kostka.__pocet_sten)
+print(kostka.vrat_pocet_sten())
