@@ -15,7 +15,7 @@ class Kostka:
         """
         #self.pocet_sten = 6     # takto je atribut veřejný a lze jej měnit zvenku třídy
                                 # např. kostka.pocet_sten = 12
-        #self.__pocet_sten = 6   # dvojité podtržítko před názvem udělá z atributu atribut neveřejný 
+        #self.__pocet_sten = 6   # dvojité podtržítko před názvem udělá z atributu atribut vnitřní 
         self.__pocet_sten = pocet_sten
 
 
@@ -25,6 +25,14 @@ class Kostka:
         """
         return self.__pocet_sten
 
+    def hod(self):
+        """
+        vykona hod kostkou a vrati nahodne cislo od 1 do poctu sten
+        """
+        import random as _random    # import modulu random jako vnitřního modulu metody hod (s jedním podtržítkem před názvem)
+        cislo = _random.randint(1, self.__pocet_sten)       # generuje náhodné číslo 1 - pocet_sten
+        return cislo
+
 
 sestistena = Kostka()   # původní definice s prázdným konstruktorem
 print(sestistena.vrat_pocet_sten())
@@ -32,3 +40,7 @@ print(sestistena.vrat_pocet_sten())
 steny = int(input("zadej počet stěn: "))
 kostka = Kostka(steny)      # nová definice instance, kdy určíme počet stěn nového objektu
 print(kostka.vrat_pocet_sten())
+
+vysledek = kostka.hod()
+print()
+print(f"Výsledek hodu je: {vysledek} ")
