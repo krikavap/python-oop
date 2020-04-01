@@ -6,7 +6,6 @@ class Kostka:
     """
     Trida reprezentuje hraci kostku
     """
-
     def __init__(self, pocet_sten = 6):     # nová definice, přidání argumentu pocet_sten, výchozí hodnota je 6
     #def __init__(self):    # původní definice
         """
@@ -19,11 +18,20 @@ class Kostka:
         self.__pocet_sten = pocet_sten
 
 
+    def __str__(self):
+        """
+        vraci textovou reprezentaci kostky
+        """
+        text = str(f"Kostka s {self.__pocet_sten} stěnami")
+        return text
+
+
     def vrat_pocet_sten(self):
         """
         vrati pocet sten kostky 
         """
         return self.__pocet_sten
+
 
     def hod(self):
         """
@@ -33,14 +41,19 @@ class Kostka:
         cislo = _random.randint(1, self.__pocet_sten)       # generuje náhodné číslo 1 - pocet_sten
         return cislo
 
-
+# vytvoření kostek
 sestistena = Kostka()   # původní definice s prázdným konstruktorem
-print(sestistena.vrat_pocet_sten())
-
 steny = int(input("zadej počet stěn: "))
 kostka = Kostka(steny)      # nová definice instance, kdy určíme počet stěn nového objektu
-print(kostka.vrat_pocet_sten())
 
-vysledek = kostka.hod()
+# hod šestistěnnou
+print(sestistena)
+for _ in range(10):
+    print(sestistena.hod(), end=" ")
 print()
-print(f"Výsledek hodu je: {vysledek} ")
+
+# hod vícestěnnou
+print(kostka)
+for _ in range(10):
+    print(kostka.hod(), end=" ")
+
