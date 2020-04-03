@@ -1,6 +1,6 @@
 """
 bojovnik.py
-
+trida bojovnik a hratky s ni
 """
 
 class Bojovnik:
