@@ -20,7 +20,7 @@ class Kostka:
 
     def __str__(self):
         """
-        vraci textovou reprezentaci kostky
+        vraci textovou reprezentaci kostky - prevadi objekt na retezec
         """
         text = str(f"Kostka s {self.__pocet_sten} stěnami")
         return text
@@ -41,6 +41,13 @@ class Kostka:
         cislo = _random.randint(1, self.__pocet_sten)       # generuje náhodné číslo 1 - pocet_sten
         return cislo
 
+    def __repr__(self):
+        """
+        vraci v retezci kod konstruktoru pro funkci eval()
+        """
+        text = str("Kostka("+str(self.__pocet_sten)+")")
+        return text
+
 # vytvoření kostek
 sestistena = Kostka()   # původní definice s prázdným konstruktorem
 steny = int(input("zadej počet stěn: "))
@@ -57,3 +64,6 @@ print(kostka)
 for _ in range(10):
     print(kostka.hod(), end=" ")
 
+jina_sestistena = eval(repr(sestistena))    # duplikuje objekt
+print()
+print(jina_sestistena)
