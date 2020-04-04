@@ -6,6 +6,10 @@ dle tutorialu https://naucse.python.cz/course/pyladies/beginners/class/
 class Zviratko:
     """
     spolecna trida pro vsechny zviratka
+    metody:
+    snez(jidlo) - sni jidlo, vypíše text
+    udelej_zvuk(zvuk) - vypíše zvuk 
+
     """
     def __init__(self, jmeno):
         self.jmeno = jmeno
@@ -13,40 +17,38 @@ class Zviratko:
     def snez(self, jidlo):
         print(f"{self.jmeno}: {jidlo} mi chutná! ")
 
+    def udelej_zvuk(self, zvuk):
+        """
+        metoda vypíše zvuk
+        """
+        print(f"{self.jmeno}: {zvuk}! ")
+
 
 class Kotatko(Zviratko):
     """
     dedicna trida z tridy Zviratka
     vytvoří objekt Kotatko
-    dostupné metody:
-    zamnoukej() - vrati zamnoukani
+    
     """
     def __str__(self):
         return (f"Koťátko jménem {self.jmeno}")
                 
-    def zamnoukej(self):
-        print(f"{self.jmeno}: Mňau!")
-
-
+    
 class Stenatko(Zviratko):
     """
     trida stenatek
-    metody:
-    zastekej() - vrati zastekani
+       
     """
     def __str__(self):
         return (f"Štěňátko jménem {self.jmeno}")
                 
-    def zastekej(self):
-        print(f"{self.jmeno}: Haf haf!")           
-    
+       
 class Kocka(Zviratko):
     """
     dedicna trida z tridy Zviratka
     třída kočka má devět životů
     dostupné metody:
     je_ziva() - True pokud pocet_zivotu > 0
-    zamnoukej() - vrátí zamňoukání
     uber_zivot() - ubere 1 život 
     snez() - lokalni metoda stejneho jmena, jako metoda v nadtride. Lokalni ma prednost.
     """
@@ -63,12 +65,6 @@ class Kocka(Zviratko):
 
     def __str__(self):
         return (f"Kočka jménem {self.jmeno}")
-
-    def zamnoukej(self):
-        """
-        metoda zamnouka
-        """
-        print(f"{self.jmeno}: Mňau!")
 
     def uber_zivot(self, pocet):
         """
@@ -113,9 +109,9 @@ zorro = Stenatko("Zorro")
 print(mourek)
 print(micka)
 print(zorro)
-mourek.zamnoukej()
-micka.zamnoukej()
-zorro.zastekej()
+mourek.udelej_zvuk("Mňau")
+micka.udelej_zvuk("Mňau, mňoumňau")
+zorro.udelej_zvuk("Haf, haf, haf")
 
 micka.snez("ryba a brambory")
 mourek.snez("řízek")
@@ -129,13 +125,9 @@ zviratka = [Kotatko("Micka"), Kotatko("Mourek"), Stenatko("Zorro")]
 for i in zviratka:
     i.snez("flákota")
 
-
-
-
-
 skliba = Kocka("Sklíba")
 print(skliba)
-skliba.zamnoukej()
+skliba.udelej_zvuk("Mňau")
 skliba.snez("mléko")
 skliba.uber_zivot(3)
 print(skliba.pocet_zivotu)
