@@ -45,20 +45,26 @@ class Kocka:
         print(f"{self.jmeno}: Mňau!")
 
     def uber_zivot(self, pocet):
-        self.pocet_zivotu = self.pocet_zivotu - pocet
-        text = self.je_ziva()
-        print(text)
+        if not self.je_ziva():
+            print("Nemůžeš zabít mrtvou kočku")
+        else:
+            self.pocet_zivotu = self.pocet_zivotu - pocet
         
     def je_ziva(self):
         if self.pocet_zivotu > 0:
-            return (f"{self.jmeno}: jsem živá ")
+            return True
         else:
-            return (f"{self.jmeno}: jsem mrtvá ")
+            return False
 
     def snez(self, jidlo):
-        if "ryba" in jidlo or self.pocet_zivotu != self.ini_pocet_zivotu:
+        if not self.je_ziva():
+            print("Je zbytečné krmit mrtnou kočku")
+        
+        elif "ryba" in jidlo or self.pocet_zivotu != self.ini_pocet_zivotu:
             self.pocet_zivotu = self.pocet_zivotu + 1
-        print(f"{self.jmeno}: Mňam, {jidlo} mi chutná, mňau! ")       
+            print(f"Kočka snědla rybu a obnovil se jí jeden život")
+        else:
+            print(f"{self.jmeno}: Mňam, {jidlo} mi chutná, mňau! ")       
     
 
 
