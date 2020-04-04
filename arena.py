@@ -1,15 +1,19 @@
 """
 arena.py
+hra - souboj dvou bojovniku v arene
+konzolova aplikace
+podle tutorialu https://www.itnetwork.cz/python/oop
+
 """
 
 class Arena:
     """
-    trida ridici prubeh zapasu
-
+    trida ridici prubeh celeho zapasu
     """
+    
     def __init__(self, bojovnik_1, bojovnik_2, kostka):
         """
-        
+        iniciace Arena
         """
         self.__bojovnik_1 = bojovnik_1
         self.__bojovnik_2 = bojovnik_2
@@ -18,25 +22,26 @@ class Arena:
 
     def __vykresli(self):
         """
-        vykresli uvodni obrazovku s prehledem bojovniku a jejich stavu
-        """
-        #self.__vycisti_obrazovku()
-     
+        vykresli uvodni obrazovku s prehledem bojovniku 
+        jejich vlastnosti a aktualniho stavu 
+        - nazivu True/False pomoci metody nazivu
+        - poctu zbyvajicich zivotu (vrat_zivot())
+        a grafickeho vyjadreni zbyvajiciho zivota (graficky_zivot())
+        """            
         print()
         print("Zdraví bojovníků: \n")
         print(f"Bojovník 1: {self.__bojovnik_1}")
-        print(f"Naživu: {self.__bojovnik_1.nazivu}")
+        print(f"Naživu:     {self.__bojovnik_1.nazivu}")
         print(f"Život:  {self.__bojovnik_1.vrat_zivot():>5} hp       {self.__bojovnik_1.graficky_zivot()} ")
         print()
         print(f"Bojovník 2: {self.__bojovnik_2}")
-        print(f"Naživu: {self.__bojovnik_2.nazivu}")
+        print(f"Naživu:     {self.__bojovnik_2.nazivu}")
         print(f"Život:  {self.__bojovnik_2.vrat_zivot():>5} hp       {self.__bojovnik_2.graficky_zivot()} ")
-        
 
-    
+
     def __vycisti_obrazovku(self):
         """
-        smaze obrazovku
+        smaze obrazovku, a to prikazem pouzivaneho operacniho systemu
         """
         import sys as _sys
         import subprocess as _subprocess
@@ -59,8 +64,9 @@ class Arena:
     def zapas(self):
         """
         metoda ridici cely zapas
+        
         """
-
+        # vypsání úvodní obrazovky
         self.__vycisti_obrazovku()
         print("-" * 15, " Aréna ", "-" * 15,"\n")
         print("Vítejte v aréně")
@@ -70,6 +76,12 @@ class Arena:
         print("Zápas může začít...", end=" ")
         input()
 
+        # prohození bojovníků - pokud padne na kostce sudá, první útočí bojovnik_1
+        # pokud lichá, první útočí bojovník_2
+        zbytek = self.__kostka.hod() % 2 
+        if zbytek > 0:
+            (self.__bojovnik_1, self.__bojovnik_2) = (self.__bojovnik_2, self.__bojovnik_1)
+
         # cyklus s bojem
         while (self.__bojovnik_1.nazivu and self.__bojovnik_2.nazivu):
             self.__vycisti_obrazovku()
@@ -78,8 +90,7 @@ class Arena:
             self.__vypis_zpravu(self.__bojovnik_2.vrat_posledni_zpravu())
             self.__vykresli()
             input()
-
-            if self.__bojovnik_2.nazivu:
+            if self.__bojovnik_2.nazivu:        # testování zamezí tomu, aby útočil mrtvý bojovník
                 self.__vycisti_obrazovku()
                 self.__bojovnik_2.utoc(self.__bojovnik_1)
                 self.__vypis_zpravu(self.__bojovnik_2.vrat_posledni_zpravu())
@@ -213,7 +224,7 @@ class Bojovnik:
         
             if self.__zivot < 0:
                 self.__zivot = 0        
-                zprava = zprava + "a zemřel"        # doplnění zprávy
+                zprava = zprava + " a zemřel"        # doplnění zprávy
         else:
             zprava = (f"{self.__jmeno} odrazil útok ")      # pokud odražení útoku bylo úspěšné a bez zranění
         
@@ -247,13 +258,9 @@ class Bojovnik:
 kostka = Kostka(10)         # vytvoření objektu kostka
 
 # vytvoření bojovníků a arény
-zalrogen = Bojovnik("Zalgoren", 100, 20, 10, kostka)        
-shadow = Bojovnik("Shadow", 60, 18, 15, kostka)
+zalrogen = Bojovnik("ZALGOREN", 100, 20, 10, kostka)        
+shadow = Bojovnik("SHADOW", 60, 18, 15, kostka)
 arena = Arena(zalrogen, shadow, kostka)
 
 # zápas
 arena.zapas()
-
-
-
-
